@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Dashboard from './components/Dashboard';
+import Display from "./components/Display";
 
 
 
@@ -8,11 +9,11 @@ import Dashboard from './components/Dashboard';
 
 function App() {
   const [strikes, setStrikes] = useState(0);
-  const [balls, setBalls] = useState(0);
+  let [balls, setBalls] = useState(0);
 
   const addBall = () => {
     if (balls < 4) {
-      setBalls = balls + 1
+      setBalls(balls + 1)
     } else {
       setBalls(balls - balls)
       setStrikes(strikes - strikes)
@@ -45,7 +46,8 @@ function App() {
   return (
     <div className="App">
       <h1>Baseball Scorecard</h1>
-      <Dashboard />
+      <Display balls={balls} strikes={strikes} />
+      <Dashboard addStrike={addStrike} addBall={addBall} addFoul={addFoul} addHit={addHit} />
     </div>
   );
 }
